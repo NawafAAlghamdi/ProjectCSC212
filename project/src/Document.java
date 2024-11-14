@@ -39,7 +39,7 @@ public class Document{
         }
     }
     public static void main(String[] args) {
-       Read("src\\dataset.csv");
+       Read("project\\src\\dataset.csv");
        
     }
 }

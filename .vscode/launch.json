@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Document",
+            "request": "launch",
+            "mainClass": "Document",
+            "projectName": "ProjectCSC212-3_bd35471a"
+        },
+        {
             "type": "jdk",
             "request": "launch",
             "name": "Launch Java App"
