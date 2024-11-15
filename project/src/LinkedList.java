@@ -54,4 +54,14 @@ public class LinkedList<T> {
             current = current.next;
         }
     }
+    public void display(){
+        if(head==null){
+            System.out.println("The list is empty");
+        }
+        Node<T> tmp = head;
+        while(tmp!=null){
+            System.out.println(tmp.data + " ");
+            tmp=tmp.next;
+        }
+    }
 }

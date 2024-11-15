@@ -9,6 +9,13 @@
             "name": "Document",
             "request": "launch",
             "mainClass": "Document",
+            "projectName": "ProjectCSC212-5_bd35471c"
+        },
+        {
+            "type": "java",
+            "name": "Document",
+            "request": "launch",
+            "mainClass": "Document",
             "projectName": "ProjectCSC212-3_bd35471a"
         },
         {
