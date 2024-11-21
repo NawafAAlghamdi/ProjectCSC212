@@ -7,11 +7,13 @@ class Driver{
 	LinkedList<String> stopWords;
 	index index1;
 	Inverted_Index inverted;
+	Inverted_Index_BST invertedBST;
 
 	public Driver() {
 		this.stopWords = new LinkedList<>();
 		this.index1 = new index();
 		this.inverted = new Inverted_Index();
+		this.invertedBST = new Inverted_Index_BST();
 	}
 
 	public void Load_stopWords (String fileName) {
@@ -44,7 +46,7 @@ class Driver{
 				int id = Integer.parseInt(x.trim());
 				String content = line.substring(line.indexOf(',')+1).trim();
 				LinkedList<String> words_in_doc = make_linked_list_of_words_in_doc_index_inverted_index(content,id);
-				index1.add_Doc(new Document (id,words_in_doc));
+				index1.add_Doc(new Document (id,words_in_doc,content));
 			}
 		}
 			catch(Exception e) {
@@ -68,6 +70,7 @@ class Driver{
 				if(!existsIn_stop_words(w)) {
 					words_in_doc.insert(w);
 					inverted.add(w,id);
+					invertedBST.add(w, id);
 				}
 			}
 		}
@@ -95,7 +98,8 @@ class Driver{
 		d.Load_all_files("project\\src\\stop.txt", "project\\src\\dataset.csv");
 		d.index1.display();
 		System.out.println("\n---------------");
-		d.inverted.display_Inverted_Index();
+		
+		d.invertedBST.display_Inverted_Index();
 		
 	}
 }

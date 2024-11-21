@@ -1,5 +1,5 @@
 
-import java.security.spec.EncodedKeySpec;
+
 
 public class BST<T> {
     BSTNode<T> root, current;
@@ -56,17 +56,17 @@ public class BST<T> {
 				return findparent(p, t.right);
 		}
 	}
-    public boolean findkey(int tkey) {
+    public boolean findkey(String tkey) {
 		BSTNode<T> p = root, q = root;	
 		if(empty())
 			return false;	
 		while(p != null) {
 			q = p;
-			if(p.key == tkey) {
+			if(tkey.compareToIgnoreCase(p.key)==0) {
 				current = p;
 				return true;
 			}
-			else if(tkey < p.key)
+			else if(tkey.compareTo(p.key)<0)
 				p = p.left;
 			else
 				p = p.right;
@@ -74,7 +74,7 @@ public class BST<T> {
 		current = q;
 		return false;
 	}
-    public boolean insert(int k, T val) {
+    public boolean insert(String k, T val) {
 		BSTNode<T> p, q = current;
 		if(findkey(k)) {
 			current = q;  // findkey() modified current
@@ -87,7 +87,7 @@ public class BST<T> {
 		}
 		else {
 			// current is pointing to parent of the new key
-			if (k < current.key)
+			if (k.compareToIgnoreCase(current.key)<0)
 				current.left = p;
 			else
 				current.right = p;
@@ -103,8 +103,8 @@ public class BST<T> {
     private void inOrder(BSTNode node){
             if(node==null) return;
             inOrder(node.left);
-                System.out.println("key= " + node.key);
-                System.out.println(node.data);
+              
+                ((Word)node.data).display();
             inOrder(node.right);
     }
     
