@@ -11,10 +11,11 @@ public class Inverted_Index {
 		
 		if(!search_Word_in_inverted(text)) {
 			Word w = new Word(text);
-			w.doc_IDS.insert(w);
+			w.document_IDs.insert(id);
+			inverted_Index.insert(w);
 		}else {
 			Word existing_Word = inverted_Index.retrieve();
-			existing_Word.add_Id(id);
+			existing_Word.add_DocID(id);
 		}
 		
 	}
