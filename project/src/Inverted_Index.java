@@ -26,13 +26,13 @@ public class Inverted_Index {
 		
 		inverted_Index.findFirst();
 		while(!inverted_Index.last()) {
-			if(inverted_Index.retrieve().equals(text)) {
+			if(inverted_Index.retrieve().word.equals(text)) {
 				return true;
 			}
 			inverted_Index.findNext();
 			
 		}
-		if(inverted_Index.retrieve().equals(text)) {
+		if(inverted_Index.retrieve().word.equals(text)) {
 			return true;
 		}
 		
