@@ -15,6 +15,7 @@ public class index{
               
                 System.out.println("ID:" + documents.retrieve().id);
                 documents.retrieve().words.display();
+                System.out.println();
                 documents.findNext();
         }
         

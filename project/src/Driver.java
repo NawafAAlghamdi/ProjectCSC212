@@ -14,7 +14,7 @@ class Driver{
 		this.inverted = new Inverted_Index();
 	}
 
-	public void Load_stopWordes (String fileName) {
+	public void Load_stopWords (String fileName) {
 		
 		try {
 			File f = new File (fileName);
@@ -85,5 +85,17 @@ class Driver{
 		        return true;
 		    }
 		    return false;
+	}
+	public void Load_all_files(String stopwordsFile,String documentFile){
+		Load_stopWords(stopwordsFile);
+		Load_all_doc(documentFile);
+	}
+	public static void main(String[] args) {
+		Driver d = new Driver();
+		d.Load_all_files("project\\src\\stop.txt", "project\\src\\dataset.csv");
+		d.index1.display();
+		System.out.println("\n---------------");
+		d.inverted.display_Inverted_Index();
+		
 	}
 }
