@@ -3,7 +3,7 @@
 public class LinkedList<T> {
 	private Node<T> head;
 	private Node<T> current;
-	
+	int n=0;
     public LinkedList() {
 		head = current = null;
 	}
@@ -29,6 +29,7 @@ public class LinkedList<T> {
         current.data = e;
     }
     public void insert(T e) {
+        n++;
         if (empty()) {
             current = head = new Node<T>(e);
         } else {

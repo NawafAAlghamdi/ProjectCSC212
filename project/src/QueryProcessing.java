@@ -1,8 +1,9 @@
 
 public class QueryProcessing {
-	static InvertedIndex inverted;
 
-    public QueryProcessing(InvertedIndex inverted) {
+	static Inverted_Index inverted;
+
+    public QueryProcessing(Inverted_Index inverted) {
         this.inverted = inverted;
     }
 
@@ -14,14 +15,14 @@ public class QueryProcessing {
         if (terms.length == 0) return A;
 
        
-        boolean found = inverted.search_word_in_inverted(terms[0].trim().toLowerCase());
+        boolean found = inverted.search_Word_in_inverted(terms[0].trim().toLowerCase());
         if (found) {
-            A = inverted.inverted_index.retrieve().doc_IDS;
+            A = inverted.inverted_Index.retrieve().document_IDs;
         }
         for (int i = 1; i < terms.length; i++) {
-             found = inverted.search_word_in_inverted(terms[i].trim().toLowerCase());
+             found = inverted.search_Word_in_inverted(terms[i].trim().toLowerCase());
             if (found) {
-                B = inverted.inverted_index.retrieve().doc_IDS;
+                B = inverted.inverted_Index.retrieve().document_IDs;
             }
             A = AndQuery(A, B);
         }
@@ -54,6 +55,20 @@ public class QueryProcessing {
                 break;
         }
         return result;
+    }
+    public static boolean existsIn_result(LinkedList<Integer> result, Integer id) {
+        if(result.empty()) return false;
+        result.findFirst();
+        while (!result.last()) {
+            if (result.retrieve().equals(id)) {
+                return true;
+            }
+            result.findNext();
+        }
+        if (result.retrieve().equals(id)) {
+            return true;
+        }
+        return false;
     }
     
     
