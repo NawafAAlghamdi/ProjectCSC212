@@ -15,11 +15,29 @@ public class index{
               
                 System.out.println("ID:" + documents.retrieve().id);
                 documents.retrieve().words.display();
+                System.out.println();
                 documents.findNext();
         }
         
         System.out.println("ID:" + documents.retrieve().id);
         documents.retrieve().words.display();
 
+    }
+    public LinkedList<Integer> get_all_documents_given_term(String word){
+        LinkedList<Integer> result = new LinkedList<>();
+        if(documents.empty()){
+            System.out.println("There are no documents");
+            return null;
+
+        }
+        documents.findFirst();
+        while(!documents.last()){
+            if(documents.retrieve().words.exists(word.toLowerCase().trim()))
+                result.insert(documents.retrieve().id);
+                documents.findNext();
+        }
+        if(documents.retrieve().words.exists(word.toLowerCase().trim()))
+                result.insert(documents.retrieve().id);
+                return result;
     }
 }

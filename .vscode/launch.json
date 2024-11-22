@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Driver",
+            "request": "launch",
+            "mainClass": "Driver",
+            "projectName": "ProjectCSC212-6_bd35471d"
+        },
+        {
+            "type": "java",
             "name": "Document",
             "request": "launch",
             "mainClass": "Document",

@@ -60,8 +60,18 @@ public class LinkedList<T> {
         }
         Node<T> tmp = head;
         while(tmp!=null){
-            System.out.println(tmp.data + " ");
+            System.out.print(tmp.data + " ");
             tmp=tmp.next;
         }
+    }
+    public boolean exists(T x){
+        Node<T> p = head;
+        while(p!=null){
+            if(p.data.equals(x))
+            return true;
+            p=p.next;
+        }
+        return false;
+
     }
 }

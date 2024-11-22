@@ -21,4 +21,11 @@ public class Word{
 
             document_IDs.insert(id);
     }
+    public void display(){
+        System.out.println("\n---------------------------");
+        System.out.println("word: " + word);
+        System.out.print("[");
+        document_IDs.display();
+        System.out.println("]");
+    }
 }
