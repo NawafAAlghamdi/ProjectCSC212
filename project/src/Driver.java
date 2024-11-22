@@ -4,16 +4,18 @@ import java.io.IOException;
 import java.util.Scanner;
 
 class Driver {
+
 	LinkedList<String> stopWords;
 	index index1;
-	InvertedIndex inverted;
-	InvertedIndexBST invertedBST;
+	Inverted_Index inverted;
+	Inverted_Index_BST invertedBST;
 	int num_tokens = 0;
+	LinkedList<String> unique_words = new LinkedList<>();
 
 	public Driver() {
-		stopWords = new LimkedList<>();
+		stopWords = new LinkedList<>();
 		index1 = new index();
-		inverted = new InvertedIndex();
+		inverted = new Inverted_Index();
 	}
 
 	public void Load_stopWordes(String fileName) {
@@ -22,10 +24,11 @@ class Driver {
 			File f = new File(fileName);
 			Scanner s = new Scanner(f);
 			while (s.hasNextLine()) {
-				String line = s.nextline();
+				String line = s.nextLine();
 				stopWords.insert(line);
 			}
-		} catch (IOExeption e) {
+		} catch (IOException e) {
+
 			e.printStackTrace();
 		}
 	}
@@ -45,42 +48,45 @@ class Driver {
 				String x = line.substring(0,line.indexOf(','));
 				int id = Integer.parseInt(x.trim());
 				String contant = line.substring(line.indexOf(',')+1).trim();
-				LinkedList<String>words_in_doc=make_linked_list_of_words_in_doc_index_inverted_index(contant);
-				index1.add_Document(new Document (id.words_in_doc));
+				LinkedList<String>words_in_doc=make_linked_list_of_words_in_doc_index_inverted_index(contant,id);
+				index1.add_Doc(new Document (id,words_in_doc,contant));
 			}
+		}
 			catch(Exception e) {
 				System.out.println("end of file");
 			}
-		}
-
-	public LinkedList<String> make_linked_list_of_words_in_doc_inverted_index(String contant,int id){
-			LinkedList<String>words_in_doc = newLinkedList <String>();
+		
+	}
+	public LinkedList<String> make_linked_list_of_words_in_doc_index_inverted_index(String contant,int id){
+			LinkedList<String> words_in_doc = new LinkedList <String>();
 			make_index_and_inverted_index(contant, words_in_doc,id);
 			return words_in_doc;
 			
 		}
 
-	public void make_index_andinverted_index(String_contant,LinkedList<String>words_in_doc,int id) {
-			contant = contant.relaceAll("\'","");
+	public void make_index_and_inverted_index(String contant,LinkedList<String> words_in_doc,int id) {
+			contant = contant.replaceAll("\'","");
 			contant =contant.replaceAll("-", ""); 
 			
-			contant = contant.toLowerCase().replaceAll("[^a-zA-z0-9 ", "");
+			contant = contant.toLowerCase().replaceAll("[^a-zA-z0-9] ", "");
 			String[]tokens =contant.split("\\s+");
 			num_tokens+=tokens.length;
 			
 			for (String w : tokens) {
-				if(unique_words.exist(w)) {
+				if(unique_words.exists(w)) {
 					unique_words.insert(w);
 				}
-			}
-				if(!exeistIn_stop_words(w)) {
+			
+				if(!existsIn_stop_words(w)) {
 					words_in_doc.insert(w);
 					inverted.add(w,id);
 				}
 			}
 		}
+		
 
-	public boolean existsIn_stop_words(String word) {
+	public boolean existsIn_stop_words(String word){
+
 		if (stopWords == null || stopWords.empty())
 			return false;
 		stopWords.findFirst();
@@ -95,6 +101,10 @@ class Driver {
 		}
 		return false;
 	}
+	public void Load_all_files(String stop,String file){
+		Load_stopWordes(stop);
+		Load_all_doc(file);
+	}
 
 	public void display_doc_with_given_IDS(LinkedList<Integer> IDs)
 			{
@@ -105,26 +115,26 @@ class Driver {
 			    IDs.findFirst();
 			    while(!IDs.last())
 			    {
-			        Document d=index1.get_document_given_id(IDs.retrieve());
+			        Document d=index1.get_Document_given_id(IDs.retrieve());
 			        if(d!=null)
 			        {
 			            System.out.println("Document "+d.id+":"+d.content);
 			        }
 			        IDs.findNext();
 			    }
-			    Document d=index1.get_document_given_id(IDs.retrieve());
+			    Document d=index1.get_Document_given_id(IDs.retrieve());
 			    if(d!=null)
 			    {
 			        System.out.println("Document "+d.id+":"+d.content);
 			    }
 			    System.out.println("");
-
+			}
 	public static void Test1() {
 		Driver d = new Driver();
 		d.Load_all_files("stop.txt", "dataset.csv");
-		d.index1.displayDocuments();
+		d.index1.display();
 		System.out.println("\n=============================");
-		d.inverted.display_inverted_index();
+		d.inverted.display_Inverted_Index();
 		System.out.println("num of tokens=" + d.num_tokens);
 		System.out.println("num of unique=" + d.unique_words.n);
 
@@ -136,5 +146,6 @@ class Driver {
 		d.display_doc_with_given_IDS(res1);
 
 	}
+
 
 }

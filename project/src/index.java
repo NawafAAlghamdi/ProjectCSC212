@@ -40,4 +40,21 @@ public class index{
                 result.insert(documents.retrieve().id);
                 return result;
     }
+    public Document get_Document_given_id(int id){
+        if(documents.empty()){
+            System.out.println("There are no documents");
+            return null;
+        }
+        documents.findFirst();
+        while(!documents.last()){
+            if(documents.retrieve().id==id){
+                return documents.retrieve();
+            }
+            documents.findNext();
+        }
+        if(documents.retrieve().id==id){
+            return documents.retrieve();
+        }
+        return null;
+    }
 }
