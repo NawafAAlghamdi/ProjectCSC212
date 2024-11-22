@@ -129,15 +129,15 @@ public class QueryProcessing_from_index {
             String term = Query.replaceFirst("NOT", "").trim().toLowerCase();
             A = index1.get_all_documents_given_term(term.trim().toLowerCase());
 
-            if(ind1.all_doc.empty()) return A;
-            ind1.all_doc.findFirst();
-            while(!ind1.all_doc.last()){
-                if(!A.exist(ind1.all_doc.retrieve().id))
-                    B.insert(ind1.all_doc.retrieve().id);
-                    ind1.all_doc.findNext();
+            if(ind1.documents.empty()) return A;
+            ind1.documents.findFirst();
+            while(!ind1.documents.last()){
+                if(!A.exists(ind1.documents.retrieve().id))
+                    B.insert(ind1.documents.retrieve().id);
+                    ind1.documents.findNext();
             }
-            if(!A.exist(ind1.all_doc.retrieve().id))
-                B.insert(ind1.all_doc.retrieve().id);
+            if(!A.exists(ind1.documents.retrieve().id))
+                B.insert(ind1.documents.retrieve().id);
             return B;
         }
 

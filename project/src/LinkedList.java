@@ -64,4 +64,14 @@ public class LinkedList<T> {
             tmp=tmp.next;
         }
     }
+    public boolean exists(T x){
+        Node<T> p = head;
+        while(p!=null){
+            if(p.data.equals(x))
+            return true;
+            p=p.next;
+        }
+        return false;
+
+    }
 }
