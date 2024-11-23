@@ -159,7 +159,7 @@ class Driver {
 								System.out.println("1- Use index");
 								System.out.println("2- Use inverted index");
 								System.out.println("3- Use BST");
-								System.out.println("Back");
+								System.out.println("4- Back");
 								int y=input.nextInt();
 							do { 
 
@@ -199,6 +199,8 @@ class Driver {
 								}
 
 							} while (y!=4);
+							break;
+
 							case 2:
 								input.nextLine();
 								System.out.print("Enter a query to rank:");
@@ -208,6 +210,7 @@ class Driver {
 								r.insert_sorted_in_list();
 								r.display_all_doc_with_score_usingList();
 								break;
+
 							case 3:
 								System.out.println("num of documents="+d.index1.documents.n); 
 							break;
