@@ -142,7 +142,7 @@ class Driver {
 				System.out.println("3- Indexed Documents(Number of documents in the index).");
 				System.out.println("4- Indexed Tokens.");
 				System.out.println("5- Exit.");
-				System.out.print("Please select on of the choices above:");
+				System.out.print("Please select one of the choices above:");
 				x=input.nextInt();
 				switch (x) {
 					case 1:
@@ -209,9 +209,11 @@ class Driver {
 								r.display_all_doc_with_score_usingList();
 								break;
 							case 3:
-								
+								System.out.println("num of documents="+d.index1.documents.n); 
 							break;
 							case 4:
+								System.out.println("num of unique words including stop words="+d.unique_words.n);
+
 						break;
 					default:
 					
