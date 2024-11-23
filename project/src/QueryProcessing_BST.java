@@ -3,7 +3,7 @@ public class QueryProcessing_BST {
 
 	static Inverted_Index_BST inverted;
 
-    public QueryProcessing(Inverted_Index_BST inverted) {
+    public QueryProcessing_BST(Inverted_Index_BST inverted) {
         this.inverted = inverted;
     }
 
@@ -17,12 +17,12 @@ public class QueryProcessing_BST {
        
         boolean found = inverted.search_Word_in_inverted(terms[0].trim().toLowerCase());
         if (found) {
-            A = inverted.inverted_Index.retrieve().document_IDs;
+            A = inverted.inverted_index.retrieve().document_IDs;
         }
         for (int i = 1; i < terms.length; i++) {
              found = inverted.search_Word_in_inverted(terms[i].trim().toLowerCase());
             if (found) {
-                B = inverted.inverted_Index.retrieve().document_IDs;
+                B = inverted.inverted_index.retrieve().document_IDs;
             }
             A = AndQuery(A, B);
         }
@@ -64,12 +64,12 @@ public class QueryProcessing_BST {
 
         boolean found = inverted.search_Word_in_inverted(terms[0].trim().toLowerCase()); 
         if(found) 
-            A = inverted.inverted_Index.retrieve().document_IDs; 
+            A = inverted.inverted_index.retrieve().document_IDs; 
         for(int i = 1; i < terms.length; i++) 
         { 
             found = inverted.search_Word_in_inverted(terms[i].trim().toLowerCase()); 
             if(found) 
-                B = inverted.inverted_Index.retrieve().document_IDs; 
+                B = inverted.inverted_index.retrieve().document_IDs; 
             A = ORQuery(A, B); 
         } 
         return A; 

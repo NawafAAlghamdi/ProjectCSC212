@@ -8,7 +8,7 @@ public class Ranking {
     static LinkedList<Integer> all_doc_in_query;
     static LinkedList<Doc_Rank> all_doc_ranked;
 
-    public Ranking(Inverted_Index_BST inverted,index index1,LinkedList<Integer> all_doc_in_query,String Query){
+    public Ranking(Inverted_Index_BST inverted,index index1,String Query){
         this.Query=Query;
         this.index1=index1;
         this.inverted=inverted;

@@ -9,6 +9,13 @@
             "name": "Driver",
             "request": "launch",
             "mainClass": "Driver",
+            "projectName": "ProjectCSC212-9_bd354720"
+        },
+        {
+            "type": "java",
+            "name": "Driver",
+            "request": "launch",
+            "mainClass": "Driver",
             "projectName": "ProjectCSC212-6_bd35471d"
         },
         {

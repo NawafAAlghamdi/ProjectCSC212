@@ -20,13 +20,15 @@ public class Inverted_Index {
 		
 	}
 	public boolean search_Word_in_inverted(String text) {
-		
+	
 		if(inverted_Index == null || inverted_Index.empty())
 		return false;
 		
 		inverted_Index.findFirst();
 		while(!inverted_Index.last()) {
+		
 			if(inverted_Index.retrieve().word.equals(text)) {
+				
 				return true;
 			}
 			inverted_Index.findNext();

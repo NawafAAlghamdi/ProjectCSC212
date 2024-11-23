@@ -16,6 +16,7 @@ class Driver {
 		stopWords = new LinkedList<>();
 		index1 = new index();
 		inverted = new Inverted_Index();
+		invertedBST = new Inverted_Index_BST();
 	}
 
 	public void Load_stopWordes(String fileName) {
@@ -65,21 +66,22 @@ class Driver {
 		}
 
 	public void make_index_and_inverted_index(String contant,LinkedList<String> words_in_doc,int id) {
-			contant = contant.replaceAll("\'","");
-			contant =contant.replaceAll("-", ""); 
+			contant = contant.replaceAll("\'"," ");
+			contant =contant.replaceAll("-", " "); 
 			
-			contant = contant.toLowerCase().replaceAll("[^a-zA-z0-9] ", "");
+			contant = contant.toLowerCase().replaceAll("[^a-zA-z0-9 ]", "");
 			String[]tokens =contant.split("\\s+");
 			num_tokens+=tokens.length;
 			
 			for (String w : tokens) {
-				if(unique_words.exists(w)) {
+				if(!unique_words.exists(w)) {
 					unique_words.insert(w);
 				}
 			
 				if(!existsIn_stop_words(w)) {
 					words_in_doc.insert(w);
 					inverted.add(w,id);
+					invertedBST.add(w,id);
 				}
 			}
 		}
@@ -129,22 +131,96 @@ class Driver {
 			    }
 			    System.out.println("");
 			}
-	public static void Test1() {
+	public static void Test() {
 		Driver d = new Driver();
-		d.Load_all_files("stop.txt", "dataset.csv");
-		d.index1.display();
-		System.out.println("\n=============================");
-		d.inverted.display_Inverted_Index();
-		System.out.println("num of tokens=" + d.num_tokens);
-		System.out.println("num of unique=" + d.unique_words.n);
+		d.Load_all_files("project\\src\\stop.txt", "project\\src\\dataset.csv");
+			Scanner input = new Scanner(System.in);
+			int x = 0;
+			do { 
+				System.out.println("1- Boolean Retrieval.");
+				System.out.println("2- Ranked Retrieval.");
+				System.out.println("3- Indexed Documents(Number of documents in the index).");
+				System.out.println("4- Indexed Tokens.");
+				System.out.println("5- Exit.");
+				System.out.print("Please select on of the choices above:");
+				x=input.nextInt();
+				switch (x) {
+					case 1:
+							input.nextLine();
+						System.out.print("Enter a query to retreive:");
+							String query = input.nextLine();
 
-		QueryProcessing g = new QueryProcessing(d.inverted);
-		LinkedList res = QueryProcessing.AndQuery("colorANDpole");
-		d.display_doc_with_given_IDS(res);
-		System.out.println("----------------------------");
-		LinkedList res1 = QueryProcessing.ORQuery("Arabia OR pole OR color");
-		d.display_doc_with_given_IDS(res1);
+						query=query.toLowerCase();
+						query=query.replaceAll(" and ", " AND ");
+						query=query.replaceAll(" or ", " OR ");
 
+						System.out.println("Which method would you want to make the query:(Enter a number)");
+						
+								System.out.println("1- Use index");
+								System.out.println("2- Use inverted index");
+								System.out.println("3- Use BST");
+								System.out.println("Back");
+								int y=input.nextInt();
+							do { 
+
+								if(y==1){
+										QueryProcessing_from_index query1 = new QueryProcessing_from_index(d.index1);
+										System.out.println("#Q " + query);
+										LinkedList res1=QueryProcessing_from_index.MixedQuery(query);
+											d.display_doc_with_given_IDS(res1);
+										break;
+								}
+								else if(y==2){
+									QueryProcessing query1 = new QueryProcessing(d.inverted);
+										System.out.println("#Q: " + query);
+										LinkedList res1=QueryProcessing.MixedQuery(query);
+											d.display_doc_with_given_IDS(res1);
+											break;
+								}
+								else if(y==3){
+									QueryProcessing_BST query1 = new QueryProcessing_BST(d.invertedBST);
+									System.out.println("#Q: " + query);
+									LinkedList res1=QueryProcessing_BST.MixedQuery(query);
+										d.display_doc_with_given_IDS(res1);
+										break;
+								}
+								else if(y==4){
+									break;
+								}
+								else {
+									System.out.println("Wrong input");
+									System.out.println("Which method would you want to make the query:(Enter a number)");
+						
+								System.out.println("1- Use index");
+								System.out.println("2- Use inverted index");
+								System.out.println("3- Use BST");
+								System.out.println("Back");
+								 y=input.nextInt();
+								}
+
+							} while (y!=4);
+							case 2:
+								input.nextLine();
+								System.out.print("Enter a query to rank:");
+								String query2 = input.nextLine();
+								query2=query2.toLowerCase();
+								Ranking r = new Ranking(d.invertedBST,d.index1 ,query2);
+								r.insert_sorted_in_list();
+								r.display_all_doc_with_score_usingList();
+								break;
+							case 3:
+								
+							break;
+							case 4:
+						break;
+					default:
+					
+				}
+
+			} while (x!=5);
+	}
+	public static void main(String[] args) {
+		Test();
 	}
 
 

@@ -6,7 +6,10 @@ public class Doc_Rank {
         this.rank=r;
     }
     public void display(){
-        System.out.println(id + " " + rank);
+        if(id>=10)
+        System.out.println(id + " \t" + rank);
+        else
+        System.out.println(id + "  \t" + rank);
     }
 }
 
